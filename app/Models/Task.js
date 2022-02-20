@@ -6,7 +6,8 @@ export class Task{
         this.name = data.name
         this.listId = data.listId
     }
-    get Template(){
-        return `<li class="d-flex justify-content-between">${this.name} <i class="mdi mdi-delete selectable" title="Delete ${this.name}" onclick="app.tasksController.deleteTask('${this.id}')"></i></li>`
+    get Template() {
+        
+        return `<li class="d-flex justify-content-between"><p>${this.name}</p> <i class="mdi mdi-delete selectable" title="Delete" onclick="app.tasksController.deleteTask('${this.id}')"></i></li>`
     }
 }

@@ -9,7 +9,8 @@ export class List{
     }
 
 
-    get Template() {
+  get Template() {
+      
         return `<div class="col-md-4 p-3">
               <div class="shadow card text-white mb-3" style="max-width: 18rem; background-color:${this.color}">
                   <div style="background-color:${this.color}" class= "card-header text-center">
@@ -17,13 +18,13 @@ export class List{
                   </h3>
                     </div>
                     <div class="card-body">
-                    ${this.TaskTemplate}
+                     ${this.TaskTemplate}
                     </div>
-                    <form class= onsubmit="app.tasksController.createTask('${this.id}')px-3 pb-2">
+                    <form onsubmit="app.tasksController.createTask('${this.id}')" class="px-3 pb-2">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Task" aria-label="task"
+                <input minLength="3" maxLength="50" required type="text" class="form-control" placeholder="Task" aria-label="task"
                   aria-describedby="task" id="name">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i
                     class="mdi mdi-check"></i></button>
               </div>
             </form>
@@ -31,12 +32,13 @@ export class List{
               </div>`
     }
 
-    get TaskTemplate() {
+  get TaskTemplate() {
+        
         let template = ''
         const myTasks = ProxyState.tasks.filter(t => t.listId == this.id)
       myTasks.forEach(t => template += t.Template)
-      return template
       console.log('hi');
+      return template
   }
   
   

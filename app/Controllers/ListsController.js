@@ -1,5 +1,7 @@
 import { ProxyState } from "../AppState.js";
 import { listsService } from "../Services/ListsService.js";
+import { loadState, saveState } from "../Utils/LocalStorage.js";
+import { Pop } from "../Utils/Pop.js";
 
 
 function _drawList() {
@@ -14,10 +16,15 @@ export class ListsController{
     constructor() {
         ProxyState.on('lists', _drawList)
         ProxyState.on('tasks', _drawList)
-        _drawList()
+        ProxyState.on('lists', saveState)
+        ProxyState.on('tasks', saveState)
+        //_drawList()
+
+        loadState()
     }
 
     createList() {
+        console.log('hello from create list');
         window.event.preventDefault()
         const form = window.event.target
         let newList = {
@@ -29,8 +36,10 @@ export class ListsController{
         
         listsService.createList(newList)
     }
-    deleteList(id) {
-        listsService.deleteList(id)
+    async deleteList(id) {
+        if (await Pop.confirm()) {
+            listsService.deleteList(id)
+        }
     }
 
 }
